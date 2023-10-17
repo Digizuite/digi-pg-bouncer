@@ -27,8 +27,8 @@ RUN \
   rm -rf /tmp/pgbouncer*  && \
   apk del --purge autoconf autoconf-doc automake udns-dev curl gcc libc-dev libevent-dev libtool make openssl-dev pkgconfig
 
-ADD run-pg-bouncer.sh /usr/bin/
+ADD --chmod=777 run-pg-bouncer.sh /usr/bin/
 
 USER postgres
 EXPOSE 5432
-ENTRYPOINT ["/usr/bin/run-pg-bouncer.sh"]
+CMD ["sh", "/usr/bin/run-pg-bouncer.sh"]
