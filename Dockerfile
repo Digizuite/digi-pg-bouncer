@@ -6,7 +6,7 @@ RUN \
   # security
   apk add -U --no-cache --upgrade busybox && \
   # Download
-  apk add -U --no-cache autoconf autoconf-doc automake udns udns-dev curl gcc libc-dev libevent libevent-dev libtool make openssl-dev pkgconfig postgresql-client && \
+  apk add -U --no-cache inotify-tools autoconf autoconf-doc automake udns udns-dev curl gcc libc-dev libevent libevent-dev libtool make openssl-dev pkgconfig postgresql-client && \
   curl -o  /tmp/pgbouncer-$VERSION.tar.gz -L https://pgbouncer.github.io/downloads/files/$VERSION/pgbouncer-$VERSION.tar.gz && \
   cd /tmp && \
   # Unpack, compile
@@ -27,6 +27,8 @@ RUN \
   rm -rf /tmp/pgbouncer*  && \
   apk del --purge autoconf autoconf-doc automake udns-dev curl gcc libc-dev libevent-dev libtool make openssl-dev pkgconfig
 
+ADD run-pg-bouncer.sh /usr/bin/
+
 USER postgres
 EXPOSE 5432
-CMD ["/usr/bin/pgbouncer", "/etc/pgbouncer/pgbouncer.ini"]
+ENTRYPOINT ["/usr/bin/run-pg-bouncer.sh"]
