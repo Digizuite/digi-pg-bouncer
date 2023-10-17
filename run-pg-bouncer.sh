@@ -11,6 +11,5 @@ PG_BOUNCER_PID=$!
      done
 } &
 
-jobs
-fg %1
+wait
 
