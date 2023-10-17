@@ -10,5 +10,7 @@ PG_BOUNCER_PID=$!
          kill -1 $PG_BOUNCER_PID
      done
 } &
-fg $PG_BOUNCER_PID
+
+jobs
+fg %1
 
